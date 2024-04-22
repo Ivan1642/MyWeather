@@ -17,9 +17,9 @@ import java.util.Date;
 
 public class MainActivity extends BaseActivity implements CallInterface {
 
-    private TextView txtView ;
-    private TextView textViewDay;
-    private TextView textViewDayOfWeek;
+    private TextView txtView;
+//    private TextView textViewDay;
+//    private TextView textViewDayOfWeek;
     private ImageView imageView;
     private Root root;
     @Override
@@ -28,9 +28,8 @@ public class MainActivity extends BaseActivity implements CallInterface {
         setContentView(R.layout.activity_main);
 
         txtView = findViewById(R.id.txtView);
-        textViewDay = findViewById(R.id.textViewDay);
-        textViewDayOfWeek = findViewById(R.id.textViewDayOfWeek);
-        txtView = findViewById(R.id.txtView);
+//        textViewDay = findViewById(R.id.textViewDay);
+//        textViewDayOfWeek = findViewById(R.id.textViewDayOfWeek);
         imageView = findViewById(R.id.imageView);
 
         // Mostramos la barra de progreso y ejecutamos la llamada a la API
@@ -54,7 +53,7 @@ public class MainActivity extends BaseActivity implements CallInterface {
         Date date = new Date((long)root.list.get(0).dt*1000);
         SimpleDateFormat dateDayOfWeek = new SimpleDateFormat("E");
         SimpleDateFormat dateDay = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
-        textViewDayOfWeek.setText(dateDayOfWeek.format(date));
-        textViewDay.setText(dateDay.format(date));
+//        textViewDayOfWeek.setText(dateDayOfWeek.format(date));
+//        textViewDay.setText(dateDay.format(date));
     }
 }

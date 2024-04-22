@@ -2,7 +2,7 @@ package com.example.myweatherbase.base;
 
 public class Parameters {
 
-    public final static String API = "<put_your_API_Key_here>";
+    public final static String API = "71f8317f1b82e65c364cba8e9655b50c";
     public final static String LANG = "es";
     public final static String UNITS = "metric";
     public final static String URL = "https://api.openweathermap.org/data/2.5/";
