@@ -1,7 +1,11 @@
 package com.example.myweatherbase.activities;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.myweatherbase.API.Connector;
@@ -21,6 +25,8 @@ public class MainActivity extends BaseActivity implements CallInterface {
 //    private TextView textViewDay;
 //    private TextView textViewDayOfWeek;
     private ImageView imageView;
+    private Spinner spinner;
+    private Button btnPrevision;
     private Root root;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,8 @@ public class MainActivity extends BaseActivity implements CallInterface {
         setContentView(R.layout.activity_main);
 
         txtView = findViewById(R.id.txtView);
+        spinner = findViewById(R.id.spinner);
+        btnPrevision = findViewById(R.id.btnPrevision);
 //        textViewDay = findViewById(R.id.textViewDay);
 //        textViewDayOfWeek = findViewById(R.id.textViewDayOfWeek);
         imageView = findViewById(R.id.imageView);
@@ -35,6 +43,21 @@ public class MainActivity extends BaseActivity implements CallInterface {
         // Mostramos la barra de progreso y ejecutamos la llamada a la API
         showProgress();
         executeCall(this);
+
+        spinner.setAdapter(new SpinnerAdapter<>(this,R.layout.custom_spinner_item,Ciudad.values()));
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ImageDownloader.downloadImage(getApplicationContext(),"https://offloadmedia.feverup.com/barcelonasecreta.com/wp-content/uploads/2015/07/13082735/barcelona_skyline_wallpaper-e1626099901955.jpg",imageView,R.drawable.ic_launcher_foreground);
+                //txtView.setText();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     // Realizamos la llamada y recogemos los datos en un objeto Root
