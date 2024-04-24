@@ -22,8 +22,13 @@ import java.util.Date;
 public class MainActivity extends BaseActivity implements CallInterface {
 
     private TextView txtView;
-//    private TextView textViewDay;
-//    private TextView textViewDayOfWeek;
+    private TextView tvFecha;
+    private TextView tvEstadoCielo;
+    private TextView tvTemp;
+    private TextView tvTempMax;
+    private TextView tvTempMin;
+    private TextView tvHora;
+    private TextView tvDia;
     private ImageView imageView;
     private Spinner spinner;
     private Button btnPrevision;
@@ -36,9 +41,14 @@ public class MainActivity extends BaseActivity implements CallInterface {
         txtView = findViewById(R.id.txtView);
         spinner = findViewById(R.id.spinner);
         btnPrevision = findViewById(R.id.btnPrevision);
-//        textViewDay = findViewById(R.id.textViewDay);
-//        textViewDayOfWeek = findViewById(R.id.textViewDayOfWeek);
-        imageView = findViewById(R.id.imageView);
+        tvDia = findViewById(R.id.tvDia);
+        tvHora = findViewById(R.id.tvHora);
+        tvTempMax = findViewById(R.id.tvTempMax);
+        tvTempMin = findViewById(R.id.tvTempMin);
+        tvTemp = findViewById(R.id.tvTemp);
+        tvEstadoCielo = findViewById(R.id.tvEstadoCielo);
+        tvFecha = findViewById(R.id.tvFecha);
+        imageView = findViewById(R.id.ivRecycler);
 
         // Mostramos la barra de progreso y ejecutamos la llamada a la API
         showProgress();
@@ -49,8 +59,9 @@ public class MainActivity extends BaseActivity implements CallInterface {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                ImageDownloader.downloadImage(getApplicationContext(),"https://offloadmedia.feverup.com/barcelonasecreta.com/wp-content/uploads/2015/07/13082735/barcelona_skyline_wallpaper-e1626099901955.jpg",imageView,R.drawable.ic_launcher_foreground);
-                //txtView.setText();
+                Ciudad ciudad = (Ciudad)adapterView.getSelectedItem();
+                ImageDownloader.downloadImage(getApplicationContext(),ciudad.getUrl(),imageView,R.drawable.ic_launcher_foreground);
+                txtView.setText(ciudad.getDescription());
             }
 
             @Override
