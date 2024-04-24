@@ -22,13 +22,6 @@ import java.util.Date;
 public class MainActivity extends BaseActivity implements CallInterface {
 
     private TextView txtView;
-    private TextView tvFecha;
-    private TextView tvEstadoCielo;
-    private TextView tvTemp;
-    private TextView tvTempMax;
-    private TextView tvTempMin;
-    private TextView tvHora;
-    private TextView tvDia;
     private ImageView imageView;
     private Spinner spinner;
     private Button btnPrevision;
