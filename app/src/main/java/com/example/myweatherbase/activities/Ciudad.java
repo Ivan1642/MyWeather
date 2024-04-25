@@ -1,6 +1,8 @@
 package com.example.myweatherbase.activities;
 
-public enum Ciudad implements Listable{
+import java.io.Serializable;
+
+public enum Ciudad implements Listable, Serializable {
     VALENCIA("https://static.euronews.com/articles/stories/08/17/14/54/1200x675_cmsv2_6482dec4-473f-5a57-8f85-461f91a11272-8171454.jpg"),
     BARCELONA("https://offloadmedia.feverup.com/barcelonasecreta.com/wp-content/uploads/2015/07/13082735/barcelona_skyline_wallpaper-e1626099901955.jpg"),
     MADRID("https://imagenes.20minutos.es/files/image_1920_1080/uploads/imagenes/2023/01/24/istock-1297090032.jpeg"),

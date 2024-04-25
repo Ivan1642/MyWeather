@@ -17,6 +17,10 @@ public class Root implements Serializable {
         return city.name;
     }
 
+    public ArrayList<List> getList() {
+        return list;
+    }
+
     public class Weather implements Serializable{
         public int id;
         public String main;
