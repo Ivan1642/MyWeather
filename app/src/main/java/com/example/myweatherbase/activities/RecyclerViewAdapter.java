@@ -10,18 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myweatherbase.R;
 import com.example.myweatherbase.activities.model.Root;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
     private int layout;
-    private Context context;
-    private List<Root> previsiones;
 
-    public RecyclerViewAdapter(Context context,int layout, List<Root> previsiones) {
+    private Context context;
+    private Root root;
+
+    public RecyclerViewAdapter(Context context,int layout, Root root) {
         super();
         this.layout = layout;
         this.context = context;
-        this.previsiones = previsiones;
+        this.root = root;
     }
 
     @NonNull
@@ -39,7 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return ciudades.size();
+        return root.getList().size();
     }
 
 

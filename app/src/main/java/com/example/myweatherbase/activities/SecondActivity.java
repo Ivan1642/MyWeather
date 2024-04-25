@@ -32,10 +32,10 @@ public class SecondActivity extends BaseActivity  implements CallInterface {
 
         Intent intent = getIntent();
 
-        Root root = doInBackground();
-        recyclerView.setAdapter(new RecyclerViewAdapter(this,R.layout.my_grade_view,ciudades));
+        doInBackground();
+        recyclerView.setAdapter(new RecyclerViewAdapter(this,R.layout.my_grade_view,root));
     }
-    // Realizamos la llamada y recogemos los datos en un objeto Root
+     //Realizamos la llamada y recogemos los datos en un objeto Root
     @Override
     public void doInBackground() {
         root = Connector.getConector().get(Root.class,"&lat=39.5862518&lon=-0.5411163");
