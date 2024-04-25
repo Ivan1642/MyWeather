@@ -14,14 +14,15 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
     private int layout;
-    private Context context;
-    private List<Root> previsiones;
 
-    public RecyclerViewAdapter(Context context,int layout, List<Root> previsiones) {
+    private Context context;
+    private Root root;
+
+    public RecyclerViewAdapter(Context context,int layout, Root root) {
         super();
         this.layout = layout;
         this.context = context;
-        this.previsiones = previsiones;
+        this.root = root;
     }
 
     @NonNull
