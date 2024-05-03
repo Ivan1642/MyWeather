@@ -2,7 +2,10 @@ package com.example.myweatherbase.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myweatherbase.API.Connector;
@@ -19,10 +22,14 @@ import java.util.Date;
 public class SecondActivity extends BaseActivity  implements CallInterface {
     private RecyclerView recyclerView;
     private Root root;
+    private RecyclerViewAdapter recyclerViewAdapter;
+    private String ciudad;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -30,28 +37,50 @@ public class SecondActivity extends BaseActivity  implements CallInterface {
         showProgress();
         executeCall(this);
 
-        Intent intent = getIntent();
+        Bundle bundle = getIntent().getExtras();
+        ciudad = bundle.getString("ciudad");
 
         doInBackground();
         recyclerView.setAdapter(new RecyclerViewAdapter(this,R.layout.my_grade_view,root));
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        if (item.getItemId() == android.R.id.home){
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
      //Realizamos la llamada y recogemos los datos en un objeto Root
     @Override
     public void doInBackground() {
-        root = Connector.getConector().get(Root.class,"&lat=39.5862518&lon=-0.5411163");
+        switch (ciudad.toLowerCase()){
+            case "valencia":
+                root = Connector.getConector().get(Root.class,"&lat=39.5862518&lon=-0.5411163");
+                break;
+            case "barcelona":
+                root = Connector.getConector().get(Root.class,"&lat=41.3851&lon=2.1734");
+                break;
+            case "bilbao":
+                root = Connector.getConector().get(Root.class,"&lat=43.2630&lon=-2.9349");
+                break;
+            case "madrid":
+                root = Connector.getConector().get(Root.class,"&lat=40.4168&lon=-3.7038");
+                break;
+            case "sevilla":
+                root = Connector.getConector().get(Root.class,"&lat=37.3886&lon=-5.9823");
+                break;
+        }
     }
 
     // Una vez ya se ha realizado la llamada, ocultamos la barra de progreso y presentamos los datos
     @Override
     public void doInUI() {
         hideProgress();
-        txtView.setText(root.list.get(0).weather.get(0).description);
-        ImageDownloader.downloadImage(Parameters.ICON_URL_PRE + root.list.get(0).weather.get(0).icon + Parameters.ICON_URL_POST, imageView);
-
-        Date date = new Date((long)root.list.get(0).dt*1000);
-        SimpleDateFormat dateDayOfWeek = new SimpleDateFormat("E");
-        SimpleDateFormat dateDay = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
-//        textViewDayOfWeek.setText(dateDayOfWeek.format(date));
-//        textViewDay.setText(dateDay.format(date));
+        recyclerViewAdapter = new RecyclerViewAdapter(this,R.layout.my_grade_view,root);
+        recyclerView.setAdapter(recyclerViewAdapter);
     }
 }

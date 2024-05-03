@@ -1,5 +1,6 @@
 package com.example.myweatherbase.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -38,6 +39,16 @@ public class MainActivity extends AppCompatActivity {
         imageView = findViewById(R.id.ivRecycler);
 
         spinner.setAdapter(new SpinnerAdapter<>(this,R.layout.custom_spinner_item,Ciudad.values()));
+
+        btnPrevision.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Ciudad ciudad = (Ciudad)spinner.getSelectedItem();
+                Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+                intent.putExtra("ciudad",ciudad.getDescription());
+                startActivity(intent);
+            }
+        });
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
