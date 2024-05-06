@@ -40,7 +40,7 @@ public class SecondActivity extends BaseActivity  implements CallInterface {
         Bundle bundle = getIntent().getExtras();
         ciudad = bundle.getString("ciudad");
 
-        doInBackground();
+        executeCall(this);
         recyclerView.setAdapter(new RecyclerViewAdapter(this,R.layout.my_grade_view,root));
     }
 
