@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myweatherbase.API.Connector;
@@ -24,24 +25,24 @@ public class SecondActivity extends BaseActivity  implements CallInterface {
     private Root root;
     private RecyclerViewAdapter recyclerViewAdapter;
     private String ciudad;
+    private TextView tvCiudad;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView = findViewById(R.id.recyclerView);
-
-        // Mostramos la barra de progreso y ejecutamos la llamada a la API
-        showProgress();
-        executeCall(this);
 
         Bundle bundle = getIntent().getExtras();
         ciudad = bundle.getString("ciudad");
 
+        tvCiudad.findViewById(R.id.tvCiudad);
+        tvCiudad.setText(ciudad);
+
+        showProgress();
         executeCall(this);
-        recyclerView.setAdapter(new RecyclerViewAdapter(this,R.layout.my_grade_view,root));
     }
 
     @Override
@@ -82,5 +83,6 @@ public class SecondActivity extends BaseActivity  implements CallInterface {
         hideProgress();
         recyclerViewAdapter = new RecyclerViewAdapter(this,R.layout.my_grade_view,root);
         recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
