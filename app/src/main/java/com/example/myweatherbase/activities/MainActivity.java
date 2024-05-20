@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("ciudad",ciudad.getDescription());
                 startActivity(intent);
             }
+
+
         });
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
